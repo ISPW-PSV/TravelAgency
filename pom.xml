@@ -19,13 +19,13 @@
       		<scope>test</scope>
     	</dependency>
     	
-    	<dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.8.Final</version>
 		</dependency>
 		
-		<!-- Because this a laptop app -->
+		<!-- Because this is also a laptop app.. -->
 		<dependency>
     		<groupId>com.oracle</groupId>
 	    	<artifactId>javafx-runtime</artifactId>
@@ -36,6 +36,6 @@
   	</dependencies>
   	
   	<build>
-    	<finalName>travelagency</finalName>
+    	<finalName>Travel Agency</finalName>
   	</build>
 </project>
