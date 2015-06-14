@@ -3,6 +3,8 @@
  */
 package it.ispw.psv.travelagency;
 
+import org.joda.time.DateTime;
+
 /**
  *  
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -27,14 +29,12 @@ public class Client extends Person {
 	 */
 	private PaymentMethod paymentMethod;
 
-	/**
-	 *  
-	 */
-	public void newClient() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public Client(DateTime birthdate, String mailAddress, String name,
+			String phoneNumber, String surname, Gender gender,
+			PhysicalAddress physicalAddress, Login login) {
+		super(birthdate, mailAddress, name, phoneNumber, surname, gender,
+				physicalAddress, login);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
