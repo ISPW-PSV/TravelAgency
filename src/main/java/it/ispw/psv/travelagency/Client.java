@@ -31,9 +31,9 @@ public class Client extends Person {
 
 	public Client(DateTime birthdate, String mailAddress, String name,
 			String phoneNumber, String surname, Gender gender,
-			PhysicalAddress physicalAddress, Login login) {
+			PhysicalAddress physicalAddress, String username, String password) {
 		super(birthdate, mailAddress, name, phoneNumber, surname, gender,
-				physicalAddress, login);
+				physicalAddress, username, password);
 		// TODO Auto-generated constructor stub
 	}
 
