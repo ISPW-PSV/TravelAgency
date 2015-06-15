@@ -10,45 +10,14 @@ import org.joda.time.DateTime;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class PersonBean {
-	/** 
-	 * 
-	 */
 	//TODO: Read this http://stackoverflow.com/questions/27235033/using-joda-time-with-jpa-hibernate-and-spring in order to use with JPA
 	private DateTime birthdate;
-	
-	/**
-	 *  
-	 */
 	private String mailAddress;
-	
-	/**
-	 *  
-	 */
 	private String name;
-	
-	/**
-	 *  
-	 */
 	private String phoneNumber;
-	
-	/** 
-	 * 
-	 */
 	private String surname;
-	
-	/**
-	 *  
-	 */
 	private Gender gender;
-
-	/**
-	 *  
-	 */
 	private PhysicalAddress physicalAddress;
-
-	/**
-	 *  
-	 */
 	private Login login;
 
 	public DateTime getBirthdate() {

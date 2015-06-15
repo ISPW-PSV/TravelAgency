@@ -29,12 +29,11 @@ public class Client extends Person {
 	 */
 	private PaymentMethod paymentMethod;
 
-	public Client(DateTime birthdate, String mailAddress, String name,
-			String phoneNumber, String surname, Gender gender,
-			PhysicalAddress physicalAddress, String username, String password) {
-		super(birthdate, mailAddress, name, phoneNumber, surname, gender,
-				physicalAddress, username, password);
-		// TODO Auto-generated constructor stub
+	public Client(DateTime birthdate, String mailAddress, String name, String phoneNumber, String surname, Gender gender, PhysicalAddress physicalAddress, Login login, String hashcode) {
+		
+		super(birthdate, mailAddress, name, phoneNumber, surname, gender, physicalAddress, login);
+		
+		this.hashCode = hashcode;
 	}
 
 	/**

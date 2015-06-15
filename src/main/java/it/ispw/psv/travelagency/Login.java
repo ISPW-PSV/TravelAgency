@@ -32,6 +32,6 @@ public class Login {
 	 * @param password
 	 */
 	private Boolean checkPassword(String password) {
-		return password.length() >= 8;  //TODO for now simple lenght test
+		return password.length() >= 8;  //TODO  try to use this regex: http://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 	}
 }

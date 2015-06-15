@@ -13,7 +13,7 @@ public class ClientDAO {
 	 * @param username
 	 * @return
 	 */
-	public static Boolean findByEmail(String username) {
+	public static Boolean findByEmail(String email) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;

@@ -32,4 +32,25 @@ public class PhysicalAddress {
 	 *  
 	 */
 	private String province;
+
+	/**
+	 *  
+	 */
+	private String provinceCode;
+	
+	public PhysicalAddress(String address, String number, String city, Integer postalCode, String province, String provinceCode) {
+		super();
+		
+		this.address = address;
+		this.number = number;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.province = province;
+		this.provinceCode = provinceCode;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s %s %04d %d %s %s", address, city, number, postalCode, province, provinceCode);
+	}
 }

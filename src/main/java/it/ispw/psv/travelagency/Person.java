@@ -51,10 +51,9 @@ public class Person {
 	 */
 	private Login login;
 
-	public Person(DateTime birthdate, String mailAddress, String name,
-			String phoneNumber, String surname, Gender gender,
-			PhysicalAddress physicalAddress, String username, String password) {
+	public Person(DateTime birthdate, String mailAddress, String name, String phoneNumber, String surname, Gender gender, PhysicalAddress physicalAddress, Login login) {
 		super();
+		
 		this.birthdate = birthdate;
 		this.mailAddress = mailAddress;
 		this.name = name;
@@ -62,7 +61,7 @@ public class Person {
 		this.surname = surname;
 		this.gender = gender;
 		this.physicalAddress = physicalAddress;
-		this.login = new Login(username, password);
+		this.login = login;
 	}
 	
 	
