@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%-- Import JAVA classes here --%>
-<%@ page import="it.ispw.psv.travelagency.RegistrationForm, org.joda.time.DateTime, it.ispw.psv.travelagency.PhysicalAddress, it.ispw.psv.travelagency.Login, it.ispw.psv.travelagency.Gender" %>
+<%@ page import="it.ispw.psv.travelagency.RegistrationForm, org.joda.time.DateTime, org.joda.time.format.DateTimeFormat, org.joda.time.format.DateTimeFormatter, it.ispw.psv.travelagency.PhysicalAddress, it.ispw.psv.travelagency.Login, it.ispw.psv.travelagency.Gender" %>
 
 <%-- Prepare ClientBean and set all property from the request (if they are available) --%>
 <jsp:useBean id="clientBean" scope="request" class="it.ispw.psv.travelagency.ClientBean" />
@@ -17,16 +17,19 @@
 		//TODO: control if all fields are not null
 		
 		// Generate birthdate
-		DateTime birthdate = new DateTime(request.getParameter("birthdate"));
+		DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd/mm/yyyy");
+		DateTime birthdate = DateTime.parse(request.getParameter("birthdateString"), dateTimeFormatter);
 		// Generate physical address
 		PhysicalAddress physicalAddress = new PhysicalAddress(request.getParameter("address"), request.getParameter("number"), request.getParameter("city"), request.getParameter("postalCode"), request.getParameter("province"), request.getParameter("provinceCode"));
 		// Generate login
 		Login login = new Login(request.getParameter("username"), request.getParameter("password"));
 		
+		// Set birthdate, physicalAddress and login
 		clientBean.setBirthdate(birthdate);
 		clientBean.setPhysicalAddress(physicalAddress);
 		clientBean.setLogin(login);
 		
+		// Call controller
 		RegistrationForm.registration(clientBean.getMailAddress(), clientBean.getName(), clientBean.getPhoneNumber(), clientBean.getSurname(), clientBean.getGender(), clientBean.getBirthdate(), clientBean.getPhysicalAddress(), clientBean.getLogin());
 	}
 %>
@@ -100,9 +103,9 @@
 				
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="birthdate">Birthdate</label>  
+				  <label class="col-md-4 control-label" for="birthdateString">Birthdate</label>  
 				  <div class="col-md-4" id="datapicker-container">
-				  	<input id="birthdate" name="birthdate" type="text" placeholder="01/01/1996" class="form-control" required="">
+				  	<input id="birthdateString" name="birthdateString" type="text" placeholder="01/01/1996" class="form-control" required="">
 				  	<span class="help-block">Insert your birthdate</span>  
 				  </div>
 				</div>

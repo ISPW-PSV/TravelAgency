@@ -60,7 +60,7 @@ public class RegistrationForm {
 	 */
 	private static Boolean validatePhoneNumber(String phoneNumber) {
 		// TODO Crate method
-		return null;
+		return true;
 	}
 
 	/**
