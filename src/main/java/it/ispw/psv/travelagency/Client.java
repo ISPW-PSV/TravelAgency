@@ -39,17 +39,6 @@ public class Client extends Person {
 	/**
 	 *  
 	 */
-	public void resendVerificationMail() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		MailProvider mp = new MailProvider();
-		mp.sendVerificationMail(mailAddress);
-		// end-user-code
-	}
-
-	/**
-	 *  
-	 */
 	public void setHashCode() {
 		// begin-user-code
 		// TODO Auto-generated method stub
