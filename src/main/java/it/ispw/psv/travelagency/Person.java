@@ -19,7 +19,7 @@ public class Person {
 	/**
 	 *  
 	 */
-	private String mailAddress;
+	protected String mailAddress;
 	
 	/**
 	 *  
@@ -52,7 +52,6 @@ public class Person {
 	private Login login;
 
 	public Person(DateTime birthdate, String mailAddress, String name, String phoneNumber, String surname, Gender gender, PhysicalAddress physicalAddress, Login login) {
-		super();
 		
 		this.birthdate = birthdate;
 		this.mailAddress = mailAddress;

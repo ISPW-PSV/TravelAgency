@@ -34,7 +34,8 @@ public class Registration {
 	 * @returna a unique string of 32 characters.
 	 */
 	private static String generateHashCode(String email) {
-		// TODO Crate method
-		return null;
+		String b = new String(email);
+		b.hashCode();
+		return b;
 	}
 }

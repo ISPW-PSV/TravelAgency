@@ -20,7 +20,8 @@ public class MailProvider {
 	public void sendVerificationMail(String email) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		String link = generateLink(email);
+		//TODO Email is ready to be sent
 		// end-user-code
 	}
 

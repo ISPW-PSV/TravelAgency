@@ -23,7 +23,8 @@ public class RegistrationForm {
 	 * Regular expression for the email checks
 	 */
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	
+	private static final String PHONE_PATTERN = "^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$";
+	private static final String FIXPHONE_PATTERN = "^([0-9]*\\-?\\ ?\\/?[0-9]*)$";
 	/**
 	 *  
 	 */
@@ -59,8 +60,18 @@ public class RegistrationForm {
 	 * @return true if it is valide and false otherwise.
 	 */
 	private static Boolean validatePhoneNumber(String phoneNumber) {
-		// TODO Crate method
-		return null;
+		Pattern mobile_pattern = Pattern.compile(PHONE_PATTERN);
+		Pattern fix_pattern = Pattern.compile(FIXPHONE_PATTERN);
+		
+		Matcher mobile_matcher = mobile_pattern.matcher(phoneNumber);
+		Matcher fix_matcher = fix_pattern.matcher(phoneNumber);
+
+		Boolean m_isValid = mobile_matcher.matches();
+		Boolean f_isValid = fix_matcher.matches();
+		
+		LOGGER.info(m_isValid || f_isValid ? "Valide Phone Number" : "Not valid Phone Number");
+
+		return m_isValid || f_isValid;
 	}
 
 	/**
