@@ -51,6 +51,6 @@ public class PhysicalAddress {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %04d %d %s %s", address, city, number, postalCode, province, provinceCode);
+		return String.format("%s %s %s %04d %s %s", address, city, number, postalCode, province, provinceCode);
 	}
 }
