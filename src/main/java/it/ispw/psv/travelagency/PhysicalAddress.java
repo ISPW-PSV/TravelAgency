@@ -38,13 +38,13 @@ public class PhysicalAddress {
 	 */
 	private String provinceCode;
 	
-	public PhysicalAddress(String address, String number, String city, Integer postalCode, String province, String provinceCode) {
+	public PhysicalAddress(String address, String number, String city, String postalCode, String province, String provinceCode) {
 		super();
 		
 		this.address = address;
 		this.number = number;
 		this.city = city;
-		this.postalCode = postalCode;
+		this.postalCode = Integer.parseInt(postalCode);
 		this.province = province;
 		this.provinceCode = provinceCode;
 	}

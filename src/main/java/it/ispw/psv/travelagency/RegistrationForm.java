@@ -27,15 +27,8 @@ public class RegistrationForm {
 	/**
 	 *  
 	 */
-	public static void registration(String mailAddress, String name, String phoneNumber, String surname, Gender gender, String username, String password) {
+	public static void registration(String mailAddress, String name, String phoneNumber, String surname, Gender gender, DateTime birthdate, PhysicalAddress physicalAddress, Login login) {
 		// TODO: try with exception for validate
-		
-		// Generate birthdate
-		DateTime birthdate = new DateTime(1993, 6, 18, 0, 0);
-		// Generate physical address
-		PhysicalAddress physicalAddress = new PhysicalAddress("euro", "1", "Zagarolo", 39, "Roma", "RM");
-		// Generate login
-		Login login = new Login(username, password);
 		
 		// Check syntactical errors
 		if (validateEmail(mailAddress) && validatePhoneNumber(phoneNumber) && validateBirthdate(birthdate)) {
@@ -57,7 +50,7 @@ public class RegistrationForm {
 		
 		LOGGER.info(isValid ? "Valide email" : "Not valid email");
 		
-		return isValid;  // TODO: return or alse thrown exception?
+		return isValid;  // TODO: return false or thrown exception?
 	}
 
 	/**
