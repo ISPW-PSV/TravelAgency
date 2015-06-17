@@ -19,11 +19,10 @@ public class JPAInitializer {
 	 */
 	private static EntityManagerFactory entityManagerFactory;
 	
-	//TODO Does it should be a singleton?
 	/**
 	 * Initializes all the stuffs for JPA.
 	 */
-	public static void initJPA() {
+	private JPAInitializer() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("TravelAgency");
 		entityManager = entityManagerFactory.createEntityManager();
 	}
@@ -37,10 +36,13 @@ public class JPAInitializer {
 	}
 	
 	/**
-	 * Getter for the entityManager initialized before.
+	 * Getter for the instance of entityManager. This is a singleton. 
 	 * @return the static entity manager instance.
 	 */
 	public static EntityManager getEntityManager() {
+		if (entityManager == null) {
+			new JPAInitializer();
+		}
 		return entityManager;
 	}
 }

@@ -3,10 +3,13 @@
  */
 package it.ispw.psv.travelagency;
 
+import javax.persistence.Embeddable;
+
 /**
  *  
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
+@Embeddable
 public class Login {
 	/** 
 	 * 

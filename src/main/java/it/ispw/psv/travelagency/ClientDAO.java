@@ -3,6 +3,10 @@
  */
 package it.ispw.psv.travelagency;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 /**
  *  
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -20,6 +24,7 @@ public class ClientDAO {
 		// end-user-code
 	}
 
+	
 	/** 
 	 * 
 	 * @param hashCode
@@ -36,10 +41,9 @@ public class ClientDAO {
 	 * @param client
 	 */
 	public static void saveClient(Client client) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		EntityManager entityManager = JPAInitializer.getEntityManager();
+		entityManager.persist(client);
+		entityManager.getTransaction().commit();
 	}
 
 	/** 
