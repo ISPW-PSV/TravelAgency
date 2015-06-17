@@ -6,6 +6,7 @@ package it.ispw.psv.travelagency;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  *  
@@ -42,8 +43,14 @@ public class ClientDAO {
 	 */
 	public static void saveClient(Client client) {
 		EntityManager entityManager = JPAInitializer.getEntityManager();
+		EntityTransaction tx = entityManager.getTransaction();
+		tx.begin();
 		entityManager.persist(client);
-		entityManager.getTransaction().commit();
+		tx.commit();
+		/*
+		 * http://stackoverflow.com/questions/8758166/jpa-no-transaction-is-currently-active
+		 * Sbagliavamo nel fare la transazione come era prima. 
+		 */
 	}
 
 	/** 

@@ -41,6 +41,12 @@ public class PhysicalAddress {
 	 */
 	private String provinceCode;
 	
+	protected PhysicalAddress() {
+		/*
+		 * Empty constructor for JPA persistence request
+		 */
+	}
+	
 	public PhysicalAddress(String address, String number, String city, String postalCode, String province, String provinceCode) {
 		super();
 		

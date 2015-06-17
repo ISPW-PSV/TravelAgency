@@ -21,6 +21,12 @@ public class Login {
 	 */
 	private String password;
 
+	protected Login() {
+		/**
+		 * Empty constructor for JPA persistence request
+		 */
+	}
+	
 	public Login(String username, String password) {
 		if (checkPassword(password)) {
 			this.username = username;

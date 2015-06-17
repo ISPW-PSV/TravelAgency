@@ -19,7 +19,6 @@ import org.joda.time.DateTime;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
 	/** 
 	 * 
