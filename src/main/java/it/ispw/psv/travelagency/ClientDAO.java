@@ -3,7 +3,7 @@
  */
 package it.ispw.psv.travelagency;
 
-import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -13,6 +13,12 @@ import javax.persistence.EntityTransaction;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class ClientDAO {
+	
+	/**
+	 * Static logger instance
+	 */
+	private final static Logger LOGGER = Logger.getLogger(ClientDAO.class.getName()); 
+	
 	/** 
 	 * 
 	 * @param username
@@ -43,14 +49,12 @@ public class ClientDAO {
 	 */
 	public static void saveClient(Client client) {
 		EntityManager entityManager = JPAInitializer.getEntityManager();
-		EntityTransaction tx = entityManager.getTransaction();
-		tx.begin();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
 		entityManager.persist(client);
-		tx.commit();
-		/*
-		 * http://stackoverflow.com/questions/8758166/jpa-no-transaction-is-currently-active
-		 * Sbagliavamo nel fare la transazione come era prima. 
-		 */
+		transaction.commit();
+
+		LOGGER.info("User succesfull registered!");
 	}
 
 	/** 

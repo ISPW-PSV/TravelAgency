@@ -36,11 +36,12 @@ public class RegistrationForm {
 		// Check syntactical errors
 		try {
 			validateEmail(mailAddress);
-			validatePhoneNumber(phoneNumber);
+			//validatePhoneNumber(phoneNumber); TODO: There is an error with validation...
 			validateBirthdate(birthdate);
 			// Now check if the user is already registered
 			Registration.validate(mailAddress, name, phoneNumber, surname, gender, birthdate, physicalAddress, login);
 		} catch (ValidateException exception) {
+			LOGGER.info(exception.getMessage());
 			throw exception;
 		}
 	}
@@ -77,7 +78,7 @@ public class RegistrationForm {
 		Boolean isValidMobile = mobileMatcher.matches();
 		Boolean isValidFix = fixMatcher.matches();
 		
-		LOGGER.info(isValidMobile || isValidFix ? "Valide phone number" : "Not valid phone number");
+		LOGGER.info((isValidMobile && isValidFix) ? "Valide phone number" : "Not valid phone number");
 
 		if(!isValidMobile || !isValidFix) {
 			throw new ValidateException(ValidateType.PhoneNumber);

@@ -23,7 +23,6 @@ public class Person {
 	/** 
 	 * 
 	 */
-	//TODO: Read this http://stackoverflow.com/questions/27235033/using-joda-time-with-jpa-hibernate-and-spring in order to use with JPA
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime birthdate;
 	

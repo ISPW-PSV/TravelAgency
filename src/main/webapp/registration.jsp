@@ -112,21 +112,21 @@
 	        });
 
 		    // Check phone number
-	        $(document).ready(function() {
-	        	var phoneNumberInput = $("#phoneNumber");
+// 	        $(document).ready(function() {
+// 	        	var phoneNumberInput = $("#phoneNumber");
 	        	
-	        	phoneNumberInput.change(function(event) {	
-	        		var fixRegex = new RegExp("^([0-9]*\\-?\\ ?\\/?[0-9]*)$");
-	        		var mobileRegex = new RegExp("^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$");
-	       			if (!(fixRegex.test(phoneNumberInput.val()) && mobileRegex.test(phoneNumberInput.val()))) {
-	       				var name = phoneNumberInput.closest(":has(label)").find("label").text();
+// 	        	phoneNumberInput.change(function(event) {	
+// 	        		var fixRegex = new RegExp("^([0-9]*\\-?\\ ?\\/?[0-9]*)$");
+// 	        		var mobileRegex = new RegExp("^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$");
+// 	       			if (!(fixRegex.test(phoneNumberInput.val()) && mobileRegex.test(phoneNumberInput.val()))) {
+// 	       				var name = phoneNumberInput.closest(":has(label)").find("label").text();
 			    		
-	       				phoneNumberInput.closest(":has(span)").find("span").after(getErrorMessage(name));
-	       			} else {
-	       				//TODO: remove
-	       			}
-	        	});
-	        });
+// 	       				phoneNumberInput.closest(":has(span)").find("span").after(getErrorMessage(name));
+// 	       			} else {
+// 	       				//TODO: remove
+// 	       			}
+// 	        	});
+// 	        });
 	        
 	        //TODO: check regex birthdate
 	    

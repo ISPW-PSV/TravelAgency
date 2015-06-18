@@ -3,6 +3,8 @@
  */
 package it.ispw.psv.travelagency;
 
+import java.util.logging.Logger;
+
 import org.joda.time.DateTime;
 
 /**
@@ -10,11 +12,20 @@ import org.joda.time.DateTime;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Registration {
+	
+	/**
+	 * Static logger instance
+	 */
+	private final static Logger LOGGER = Logger.getLogger(Registration.class.getName()); 
+	
 	/**
 	 *  
 	 */
 	public static void validate(String mailAddress, String name, String phoneNumber, String surname, Gender gender, DateTime birthdate, PhysicalAddress physicalAddress, Login login) {
 		if (ClientDAO.findByEmail(mailAddress) == null) {
+			
+			LOGGER.info("User not registered!");
+			
 			String hashCode = generateHashCode(mailAddress);
 			
 			// TODO: use thread here.
