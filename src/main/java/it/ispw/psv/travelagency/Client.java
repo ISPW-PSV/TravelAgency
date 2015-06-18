@@ -35,14 +35,4 @@ public class Client extends Person {
 		
 		this.hashCode = hashcode;
 	}
-
-	/**
-	 *  
-	 */
-	public void setHashCode() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
 }

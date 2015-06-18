@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%-- Import JAVA classes here --%>
-<%@ page import="it.ispw.psv.travelagency.RegistrationForm, org.joda.time.DateTime, org.joda.time.format.DateTimeFormat, org.joda.time.format.DateTimeFormatter, it.ispw.psv.travelagency.PhysicalAddress, it.ispw.psv.travelagency.Login, it.ispw.psv.travelagency.Gender" %>
+<%@ page import="it.ispw.psv.travelagency.RegistrationForm, org.joda.time.DateTime, org.joda.time.format.DateTimeFormat, org.joda.time.format.DateTimeFormatter, it.ispw.psv.travelagency.PhysicalAddress, it.ispw.psv.travelagency.Login, it.ispw.psv.travelagency.Gender, it.ispw.psv.travelagency.ValidateException,  it.ispw.psv.travelagency.ValidateType" %>
 
 <%-- Prepare ClientBean and set all property from the request (if they are available) --%>
 <jsp:useBean id="clientBean" scope="request" class="it.ispw.psv.travelagency.ClientBean" />
@@ -30,7 +30,15 @@
 		clientBean.setLogin(login);
 		
 		// Call controller
-		RegistrationForm.registration(clientBean.getMailAddress(), clientBean.getName(), clientBean.getPhoneNumber(), clientBean.getSurname(), clientBean.getGender(), clientBean.getBirthdate(), clientBean.getPhysicalAddress(), clientBean.getLogin());
+		try {
+			RegistrationForm.registration(clientBean.getMailAddress(), clientBean.getName(), clientBean.getPhoneNumber(), clientBean.getSurname(), clientBean.getGender(), clientBean.getBirthdate(), clientBean.getPhysicalAddress(), clientBean.getLogin());
+		} catch(ValidateException exception) {
+			if(exception.getType() == ValidateType.EmailAddress) {
+				
+			}
+		}
+	} else {
+		
 	}
 %>
     
@@ -56,14 +64,75 @@
 	    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	    <!-- Datapicker -->
 	    <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js" />"></script>
-	    <script>$(document).ready(function() {
-	    	$('#datapicker-container input').datepicker({
-	    		format: "dd/mm/yyyy",
-	    	    startView: 2
-	    	});
-	    });</script> 
+	    <script>
+		    // Set Datapicker
+		    $(document).ready(function() {
+		    	$('#datapicker-container input').datepicker({
+		    		format: "dd/mm/yyyy",
+		    	    startView: 2
+		    	});
+		    });
+		    
+		    function getErrorMessage(error) {
+		    	return "<div class=\"alert alert-danger\" role=\"alert\"> \  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> \   <span class=\"sr-only\">Error:</span> \ Enter a valid \"" + error + "\"  \ </div>";
+		    }
+		    
+		    // Chech null input required
+		    $(document).ready(function() {
+		    	$("#registrationForm").on("submit", function(event) {
+			        var fields = $("input.required");
+			        for(var i = 0; i < fields.length; i++) {
+			            if($(fields[i]).val() == '') {
+				    		event.preventDefault();
+							
+				    		var name = $(fields[i]).closest(":has(label)").find("label").text();
+				    		
+			            	$(fields[i]).closest(":has(span)").find("span").after(getErrorMessage(name));
+			            } else {
+			            	// TODO: remove
+			            }
+			        }
+		    	});
+		    });	    
+	        
+	        // Check email address
+	        $(document).ready(function() {
+	        	var mailAddressInput = $("#mailAddress");
+	        	
+	        	mailAddressInput.change(function(event) {	
+	        		var regex = new RegExp("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	       			if (!regex.test(mailAddressInput.val())) {
+	       				var name = mailAddressInput.closest(":has(label)").find("label").text();
+			    		
+	       				mailAddressInput.closest(":has(span)").find("span").after(getErrorMessage(name));
+	       			} else {
+	       				//TODO: remove
+	       			}
+	        	});
+	        });
+
+		    // Check phone number
+	        $(document).ready(function() {
+	        	var phoneNumberInput = $("#phoneNumber");
+	        	
+	        	phoneNumberInput.change(function(event) {	
+	        		var fixRegex = new RegExp("^([0-9]*\\-?\\ ?\\/?[0-9]*)$");
+	        		var mobileRegex = new RegExp("^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$");
+	       			if (!(fixRegex.test(phoneNumberInput.val()) && mobileRegex.test(phoneNumberInput.val()))) {
+	       				var name = phoneNumberInput.closest(":has(label)").find("label").text();
+			    		
+	       				phoneNumberInput.closest(":has(span)").find("span").after(getErrorMessage(name));
+	       			} else {
+	       				//TODO: remove
+	       			}
+	        	});
+	        });
+	        
+	        //TODO: check regex birthdate
+	    
+	    </script> 
 	
-	    <form class="form-horizontal" action="registration.jsp" name="registrationForm" method="POST">
+	    <form class="form-horizontal" action="registration.jsp" id="registrationForm" name="registrationForm" method="POST">
 			<fieldset>
 				<!-- Form Name -->
 				<legend>Registration form</legend>
@@ -72,7 +141,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="name">Name</label>  
 				  <div class="col-md-4">
-				  	<input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" required="">
+				  	<input id="name" name="name" type="text" placeholder="Name" class="form-control input-md required">
 				  	<span class="help-block">Insert your name</span>  
 				  </div>
 				</div>
@@ -81,7 +150,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="surname">Surname</label>  
 				  <div class="col-md-4">
-				  	<input id="surname" name="surname" type="text" placeholder="Surname" class="form-control input-md" required="">
+				  	<input id="surname" name="surname" type="text" placeholder="Surname" class="form-control input-md required">
 				  	<span class="help-block">Insert your surname</span>  
 				  </div>
 				</div>
@@ -93,7 +162,7 @@
 					  <c:forEach items="<%= it.ispw.psv.travelagency.Gender.values() %>" var="gender">  <%--TODO: improve, not the right way --%>
 							<div class="radio">
 								<label for="${gender}">
-									<input type="radio" name="gender" value="${gender}">
+									<input type="radio" name="gender" value="${gender}" class="required">
 									${gender}
 								</label>
 							</div>   
@@ -105,7 +174,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="birthdateString">Birthdate</label>  
 				  <div class="col-md-4" id="datapicker-container">
-				  	<input id="birthdateString" name="birthdateString" type="text" placeholder="01/01/1996" class="form-control" required="">
+				  	<input id="birthdateString" name="birthdateString" type="text" placeholder="01/01/1996" class="form-control required">
 				  	<span class="help-block">Insert your birthdate</span>  
 				  </div>
 				</div>
@@ -114,7 +183,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="address">Address</label>  
 				  <div class="col-md-4">
-				  	<input id="address" name="address" type="text" placeholder="Piazza Santa Maria" class="form-control input-md" required="">
+				  	<input id="address" name="address" type="text" placeholder="Piazza Santa Maria" class="form-control input-md required">
 				  	<span class="help-block">Insert your address</span>  
 				  </div>
 				</div>
@@ -123,7 +192,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="number">Number</label>  
 				  <div class="col-md-4">
-				  	<input id="number" name="number" type="text" placeholder="12" class="form-control input-md">
+				  	<input id="number" name="number" type="text" placeholder="12" class="form-control input-md required">
 				  	<span class="help-block">Insert your number</span>  
 				  </div>
 				</div>
@@ -132,7 +201,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="city">City</label>  
 				  <div class="col-md-4">
-				  	<input id="city" name="city" type="text" placeholder="Zagarolo" class="form-control input-md" required="">
+				  	<input id="city" name="city" type="text" placeholder="Zagarolo" class="form-control input-md required">
 				  	<span class="help-block">Insert your city</span>  
 				  </div>
 				</div>
@@ -141,7 +210,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="postalCode">Postal code</label>  
 				  <div class="col-md-4">
-				  	<input id="postalCode" name="postalCode" type="text" placeholder="00039" class="form-control input-md" required="">
+				  	<input id="postalCode" name="postalCode" type="text" placeholder="00039" class="form-control input-md required">
 				  	<span class="help-block">Insert your postal code</span>  
 				  </div>
 				</div>
@@ -150,7 +219,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="province">Province</label>  
 				  <div class="col-md-4">
-				  	<input id="province" name="province" type="text" placeholder="Rome" class="form-control input-md" required="">
+				  	<input id="province" name="province" type="text" placeholder="Rome" class="form-control input-md required">
 				  	<span class="help-block">Insert your province</span>  
 				  </div>
 				</div>
@@ -159,7 +228,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="provinceCode">Province Code</label>  
 				  <div class="col-md-4">
-				  	<input id="provinceCode" name="provinceCode" type="text" placeholder="RM" class="form-control input-md" required="">
+				  	<input id="provinceCode" name="provinceCode" type="text" placeholder="RM" class="form-control input-md required">
 				  	<span class="help-block">Insert your province code</span>  
 				  </div>
 				</div>
@@ -170,7 +239,7 @@
 				  <div class="col-md-4">
 				    <div class="input-group">
 				      <span class="input-group-addon">+39</span>
-				      <input id="phoneNumber" name="phoneNumber" class="form-control" placeholder="123456789" type="text" required="">
+				      <input id="phoneNumber" name="phoneNumber" class="form-control required" placeholder="123456789" type="text">
 				    </div>
 				    <p class="help-block">Insert your phone number</p>
 				  </div>
@@ -180,7 +249,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="mailAddress">E-mail Address</label>  
 				  <div class="col-md-4">
-				  	<input id="mailAddress" name="mailAddress" type="text" placeholder="name@example.com" class="form-control input-md" required="">
+				  	<input id="mailAddress" name="mailAddress" type="text" placeholder="name@example.com" class="form-control input-md required">
 				  	<span class="help-block">Insert your e-mail address</span>  
 				  </div>
 				</div>
@@ -189,7 +258,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="username">Username</label>  
 				  <div class="col-md-4">
-				  	<input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
+				  	<input id="username" name="username" type="text" placeholder="Username" class="form-control input-md required">
 				  	<span class="help-block">Insert your username</span>  
 				  </div>
 				</div>
@@ -198,7 +267,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="password">Password</label>
 				  <div class="col-md-4">
-				    <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="">
+				    <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md required">
 				    <span class="help-block">Insert your password</span>
 				  </div>
 				</div>
@@ -207,7 +276,7 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="favouritePayamentMethod">Favourite Payament Method</label>
 				  <div class="col-md-4">
-				    <select id="favouritePayamentMethod" name="favouritePayamentMethod" class="form-control">
+				    <select id="favouritePayamentMethod" name="favouritePayamentMethod" class="form-control required">
 				      <option value="None">None</option>
 						<c:forEach items="<%= it.ispw.psv.travelagency.PaymentMethod.values() %>" var="method"> TODO: improve, not the right way
 				        	<option value="${method}">${method}</option>        

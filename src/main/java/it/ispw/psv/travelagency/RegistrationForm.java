@@ -20,66 +20,76 @@ public class RegistrationForm {
 	private final static Logger LOGGER = Logger.getLogger(RegistrationForm.class.getName()); 
 	
 	/**
-	 * Regular expression for the email checks
+	 * Regular expression for email and phone number checks
 	 */
-	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private static final String PHONE_PATTERN = "^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$";
-	private static final String FIXPHONE_PATTERN = "^([0-9]*\\-?\\ ?\\/?[0-9]*)$";
+	public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	public static final String MOBILE_PHONE_PATTERN = "^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\\d]{7})$";
+	public static final String FIX_PHONE_PATTERN = "^([0-9]*\\-?\\ ?\\/?[0-9]*)$";
+	
 	/**
+	 * @throws ValidateException 
 	 *  
 	 */
-	public static void registration(String mailAddress, String name, String phoneNumber, String surname, Gender gender, DateTime birthdate, PhysicalAddress physicalAddress, Login login) {
+	public static void registration(String mailAddress, String name, String phoneNumber, String surname, Gender gender, DateTime birthdate, PhysicalAddress physicalAddress, Login login) throws ValidateException {
 		// TODO: try with exception for validate
 		
 		// Check syntactical errors
-		if (validateEmail(mailAddress) && validatePhoneNumber(phoneNumber) && validateBirthdate(birthdate)) {
+		try {
+			validateEmail(mailAddress);
+			validatePhoneNumber(phoneNumber);
+			validateBirthdate(birthdate);
 			// Now check if the user is already registered
 			Registration.validate(mailAddress, name, phoneNumber, surname, gender, birthdate, physicalAddress, login);
-		} else {
+		} catch (ValidateException exception) {
+			throw exception;
 		}
 	}
 
 	/**
 	 * This method checks if the email address is valid using a regular expression.
 	 * @param email: the email address to check.
-	 * @return true if it is valide and false otherwise. 
+	 * @throws ValidateException in case of it is not valid.
 	 */
-	private static Boolean validateEmail(String email) {
+	private static void validateEmail(String email) throws ValidateException {
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		Matcher matcher = pattern.matcher(email);
 		Boolean isValid = matcher.matches();
 		
 		LOGGER.info(isValid ? "Valide email" : "Not valid email");
 		
-		return isValid;  // TODO: return false or thrown exception?
+		if(!isValid) {
+			throw new ValidateException(ValidateType.EmailAddress);
+		}
 	}
 
 	/**
 	 * This method checks if the phone number is valid.
 	 * @param phoneNumber: the phone number to check.
-	 * @return true if it is valide and false otherwise.
+	 * @throws ValidateException in case of it is not valid.
 	 */
-	private static Boolean validatePhoneNumber(String phoneNumber) {
-		Pattern mobile_pattern = Pattern.compile(PHONE_PATTERN);
-		Pattern fix_pattern = Pattern.compile(FIXPHONE_PATTERN);
+	private static void validatePhoneNumber(String phoneNumber) throws ValidateException {
+		Pattern mobilePattern = Pattern.compile(MOBILE_PHONE_PATTERN);
+		Pattern fixPattern = Pattern.compile(FIX_PHONE_PATTERN);
 		
-		Matcher mobile_matcher = mobile_pattern.matcher(phoneNumber);
-		Matcher fix_matcher = fix_pattern.matcher(phoneNumber);
+		Matcher mobileMatcher = mobilePattern.matcher(phoneNumber);
+		Matcher fixMatcher = fixPattern.matcher(phoneNumber);
 
-		Boolean m_isValid = mobile_matcher.matches();
-		Boolean f_isValid = fix_matcher.matches();
+		Boolean isValidMobile = mobileMatcher.matches();
+		Boolean isValidFix = fixMatcher.matches();
 		
-		LOGGER.info(m_isValid || f_isValid ? "Valide Phone Number" : "Not valid Phone Number");
+		LOGGER.info(isValidMobile || isValidFix ? "Valide phone number" : "Not valid phone number");
 
-		return m_isValid || f_isValid;
+		if(!isValidMobile || !isValidFix) {
+			throw new ValidateException(ValidateType.PhoneNumber);
+		}
 	}
 
 	/**
 	 * This method checks if the birthdate of the user allows him to be considered adult.
 	 * @param birthDate: the birthdate of the user.
-	 * @return true if the user is adult and false otherwise.
+	 * @throws ValidateException in case of it is not valid.
 	 */
-	private static boolean validateBirthdate(DateTime birthDate) {
+	private static void validateBirthdate(DateTime birthDate) throws ValidateException {
 		// Get the user's birth year
 		int year = birthDate.getYear();
 		
@@ -92,6 +102,8 @@ public class RegistrationForm {
 		
 		LOGGER.info(isAdult ? "It is an adult" : "It is not an adult");
 		
-		return isAdult;
+		if(!isAdult) {
+			throw new ValidateException(ValidateType.Birthdate);
+		}
 	}
 }

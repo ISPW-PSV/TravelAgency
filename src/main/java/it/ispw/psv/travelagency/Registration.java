@@ -31,11 +31,11 @@ public class Registration {
 	/**
 	 * This method generates a unique hashcode from the email address.
 	 * @param email: the email address of the user.
-	 * @returna a unique string of 32 characters.
+	 * @returna a unique string.
 	 */
 	private static String generateHashCode(String email) {
-		String b = new String(email);
-		b.hashCode();
-		return b;
+		String hashCode = new String(email);
+		hashCode.hashCode();
+		return hashCode;
 	}
 }
