@@ -3,10 +3,13 @@
  */
 package it.ispw.psv.travelagency;
 
+import javax.persistence.Embeddable;
+
 /**
  *  
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
+@Embeddable
 public class Login {
 	/** 
 	 * 
@@ -18,6 +21,12 @@ public class Login {
 	 */
 	private String password;
 
+	protected Login() {
+		/**
+		 * Empty constructor for JPA persistence request
+		 */
+	}
+	
 	public Login(String username, String password) {
 		if (checkPassword(password)) {
 			this.username = username;

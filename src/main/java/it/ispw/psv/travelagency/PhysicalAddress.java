@@ -3,10 +3,13 @@
  */
 package it.ispw.psv.travelagency;
 
+import javax.persistence.Embeddable;
+
 /** 
  * 
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
+@Embeddable
 public class PhysicalAddress {
 	/** 
 	 * 
@@ -37,6 +40,12 @@ public class PhysicalAddress {
 	 *  
 	 */
 	private String provinceCode;
+	
+	protected PhysicalAddress() {
+		/*
+		 * Empty constructor for JPA persistence request
+		 */
+	}
 	
 	public PhysicalAddress(String address, String number, String city, String postalCode, String province, String provinceCode) {
 		super();
