@@ -30,9 +30,10 @@ public class Login {
 	public Login(String username, String password) {
 		if (checkPassword(password)) {
 			this.username = username;
+			//this.password = encode(password);
 			this.password = password;
 		} else {
-			// TODO: thwron passwordException
+			// TODO: throw passwordException
 		}
 	}
 	
