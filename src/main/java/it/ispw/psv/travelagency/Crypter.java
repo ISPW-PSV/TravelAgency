@@ -12,14 +12,12 @@ import javax.persistence.Enumerated;
 
 public class Crypter {
 
-	@Enumerated(EnumType.STRING)
-	private static CodingEnum method; //NOTE: Dovuto mettere static altrimenti non mi riconosceva values()
 	
 	//http://stackoverflow.com/questions/1972392/java-pick-a-random-value-from-an-enum
 	
 	//To get a random value from an enum
 	private static final List<CodingEnum> VALUES =
-		    Collections.unmodifiableList(Arrays.asList(method.values()));
+		    Collections.unmodifiableList(Arrays.asList(CodingEnum.values()));
 	private static final int SIZE = VALUES.size();
 	private static final Random RANDOM = new Random();
 	
@@ -81,7 +79,7 @@ public class Crypter {
 		return res1;
 	}
 	
-	//Basic Cesarian Cipher
+	//Basic Caesar Cipher
 	private String method1Encode(String pass){ 
 		/*String res = null;
 		for(int i = 0, n = pass.length() ; i < n ; i++) { 
@@ -92,16 +90,16 @@ public class Crypter {
 		int j = RANDOM.nextInt(pass.length()-2)+2;  //Choose the position, at random, where will be indicated the encoding method
 		String res = null;
 		char b = pass.charAt(0); // Copy the first Character
-		b+=1; //Cesarian Cipher(+1)
+		b+=1; //Caesar Cipher(+1)
 		res += b; 
 		res += j;// Insert where to look for the encoding method
-		for(int i = 1 ; i < j ; i++) { //Cesarian Cipher(+1)
+		for(int i = 1 ; i < j ; i++) { //Caesar Cipher(+1)
 		    char c = pass.charAt(i); 
 		    c+=1;
 		    res = res + c;
 		}
 		res += 0; //Signal that it has been encoded by this method
-		for(int i = j, n = pass.length() ; i < n ; i++) { //Cesarian Cipher(+1)
+		for(int i = j, n = pass.length() ; i < n ; i++) { //Caesar Cipher(+1)
 		    char c = pass.charAt(i); 
 		    c+=1;
 		    res = res + c;
@@ -139,14 +137,31 @@ public class Crypter {
 	}
 	
 	private boolean method1Decode (String oldpass, String newpass){
-		String res = null;
-		for(int i = 0, n = oldpass.length() ; i < n ; i++) { // Cesarian Cipher(-1)
+		/*String res = null;
+		for(int i = 0, n = oldpass.length() ; i < n ; i++) { // Caesar Cipher(-1)
 		    char c = oldpass.charAt(i); 
 		    c -= 1;
 		    res = res + c;
 		}
 		
 		return res.equals(newpass); //Check if the two password match
+		*/
+		String pass = null;
+		pass = method1Encode(newpass);
+		String res =null;
+		res += pass.charAt(0); // Copy the first character
+		char j = pass.charAt(1); // Get the position of the character indicating the method used to encode the password
+		int k =Character.getNumericValue(j);
+		for(int i = 2 ; i < k ; i++) {  // Copy another section of the password string
+		    char c = pass.charAt(i); 
+		    res = res + c;
+		}
+		char meth = pass.charAt(k); //Get the method used to encode the password
+		for(int i = k+1, n = pass.length() ; i < n ; i++) { //Copy the rest of the password
+		    char c = pass.charAt(i);
+		    res = res + c;
+		}
+		return pass.equals(oldpass); //Check if the two password match
 	}
 	
 	private boolean method2Decode (String oldpass, String newpass){
