@@ -11,8 +11,10 @@ import javafx.stage.Stage;
  *
  */
 public class LaptopApp extends Application {
-
-    @Override
+ 
+	public static Person currentUser;
+	
+	@Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/sample.fxml"));
 

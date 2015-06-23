@@ -41,7 +41,7 @@ public class Crypter {
 				 if (meth == "METHOD2"){
 					res = method2Encode(pass);
 				 }
-				 if (meth == "METHOD2"){
+				 if (meth == "METHOD3"){
 					res = method3Encode(pass);
 				 }
 				 //TODO: else throw Exception
@@ -52,6 +52,10 @@ public class Crypter {
 	}
 	//Newpass: just digited. Oldpass: on the database.
 	public boolean decode (String newpass, String oldpass){
+		return decodePhaseOne(newpass,oldpass);
+	}
+	
+	private boolean decodePhaseOne(String newpass, String oldpass){
 		String res =null;
 		res += oldpass.charAt(0); // Copy the first character
 		char j = oldpass.charAt(1); // Get the position of the character indicating the method used to encode the password
@@ -156,7 +160,6 @@ public class Crypter {
 		    char c = pass.charAt(i); 
 		    res = res + c;
 		}
-		char meth = pass.charAt(k); //Get the method used to encode the password
 		for(int i = k+1, n = pass.length() ; i < n ; i++) { //Copy the rest of the password
 		    char c = pass.charAt(i);
 		    res = res + c;
