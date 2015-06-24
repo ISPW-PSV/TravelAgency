@@ -55,7 +55,7 @@ public class Registration {
 	/**
 	 * This method generates a unique hashcode from the email address.
 	 * @param email: the email address of the user.
-	 * @returna a unique string.
+	 * @return a unique string.
 	 */
 	private static String generateHashCode(String email) {
 		String hashCode = new String(email);

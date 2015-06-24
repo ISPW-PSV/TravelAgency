@@ -6,7 +6,7 @@
 package it.ispw.psv.travelagency;
 
 /**
- * This class allow to send e-mail from the system to the users.
+ * This class allows to send e-mail from the system to the users.
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class MailProvider {
@@ -20,7 +20,7 @@ public class MailProvider {
 	}
 
 	/**
-	 * This method send the confirmation mail.
+	 * This method sends the confirmation mail.
  	 * @param email: the email of the user. 
 	 * @param hashcode: the hashcode of the user.
 	 */

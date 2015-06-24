@@ -21,7 +21,7 @@ public class ValidateException extends Exception {
 	private ValidateType type; 
 	
 	/**
-	 * Costructor with type.
+	 * Constructor with type.
 	 * @param type the type of the exception.
 	 */
 	public ValidateException(ValidateType type) { 

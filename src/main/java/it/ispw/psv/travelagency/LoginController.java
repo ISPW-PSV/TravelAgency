@@ -22,7 +22,7 @@ public class LoginController {
 		}
 		else{
 			LOGGER.info("User not registered!");
-			//TODO: thrown userNotFound exception
+			new Exception("User not found. Invalid E-Mail or password.");
 		}
 	}
 	

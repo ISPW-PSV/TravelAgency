@@ -47,13 +47,13 @@ public class Client extends Person {
 	
 	/**
 	 * The constructor that calls first of all the super constructor with all parameters and it sets alse the hashcode, the favorite payment method and the "user" of the client.
-	 * @param birthdate: the birdate of the person.
+	 * @param birthdate: the birthdate of the person.
 	 * @param mailAddress: the email address.
 	 * @param name: the name.
 	 * @param phoneNumber: the phone number.
 	 * @param surname: the surname.
 	 * @param gender: the gender.
-	 * @param physicalAddress: the physical address whre the person live.
+	 * @param physicalAddress: the physical address where the person live.
 	 * @param login: the login.
 	 * @param hashcode: the hashcode of the email of the client.
 	 */

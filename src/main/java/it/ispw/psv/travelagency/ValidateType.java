@@ -6,7 +6,7 @@
 package it.ispw.psv.travelagency;
 
 /**
- * This enumeration si usefull with ValidateException in order to recognize the type of the exception.
+ * This enumeration is useful, in conjunction with ValidateException, in order to recognize the type of the exception.
  */
 public enum ValidateType {
 	/**

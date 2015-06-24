@@ -24,9 +24,10 @@ public class PersonDAO {
 		// TODO Auto-generated method stub
 		
 		//find by mail
-		//get password
-		// decode(password);
-		// verify password match
+		//exception if not found
+		//oldpass = get password
+		// return decode(password, oldpass);
+		// 
 		//NOTE: On all tables. Not necessarily a single call to check both mail and password.
 		//NOTE: Maybe change the return to String/int, and return the Role? Somehow, we must enforce the privileges and limit the views according to the role they signed in as.
 		

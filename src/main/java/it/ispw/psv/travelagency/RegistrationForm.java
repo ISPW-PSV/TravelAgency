@@ -30,7 +30,7 @@ public class RegistrationForm {
 	 * @param birthdate: the birthdate of the user.
 	 * @param physicalAddress: the physical address of the user.
 	 * @param login: the login of the user.
-	 * @throws ValidateException: means that there is something wrong into the data passed, i.e. the email is not correct,
+	 * @throws ValidateException: means that there is something wrong with the data passed, i.e. the email is not correct,
 	 * 		   the phone number is not correct or the user is too young to register himself.
 	 * @throws UserAlreadyRegisteredException: means that the user is already registered.
 	 */
