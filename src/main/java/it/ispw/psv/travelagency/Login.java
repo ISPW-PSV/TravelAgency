@@ -44,9 +44,16 @@ public class Login {
 	public Login(String username, String password) {
 		if (checkPassword(password)) {
 			this.username = username;
+<<<<<<< HEAD
 			this.password = hashString(password);
 		} else {
 			new Exception("The password is too short. Plase insert one that is almost composed by 8 charachters.");
+=======
+			//this.password = encode(password);
+			this.password = password;
+		} else {
+			// TODO: throw passwordException
+>>>>>>> 1a91f4f7bca2b7e0627c9559a3bdb1746357c08c
 		}
 	}
 	
