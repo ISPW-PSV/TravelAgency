@@ -1,3 +1,8 @@
+/*
+ * Realized for the course of ISPW at University of Roma Tor Vergata.
+ * Claudio Pastorini, Omar Shalby and Federico Vagnoni.
+ * A.A. 2014/2015
+ */
 package it.ispw.psv.travelagency;
 
 import javax.persistence.EntityManager;
@@ -6,7 +11,6 @@ import javax.persistence.Persistence;
 
 /**
  * This class initializes a static entity manager of JPA for the entire project.
- * 
  * @author Manuel Mastrofini
  */
 public class JPAInitializer {
@@ -14,6 +18,7 @@ public class JPAInitializer {
 	 * Static field for entity manager. 
 	 */
 	private static EntityManager entityManager;
+	
 	/**
 	 * Static field for entity manager factory.
 	 */
