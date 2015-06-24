@@ -1,37 +1,22 @@
-/**
- * 
+/*
+ * Realized for the course of ISPW at University of Roma Tor Vergata.
+ * Claudio Pastorini, Omar Shalby and Federico Vagnoni.
+ * A.A. 2014/2015
  */
 package it.ispw.psv.travelagency;
 
 /** 
- * 
+ * Bean for User.
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class UserBean {
-	/**
-	 *  
-	 */
 	private String cookie;
 
-	/**
-	 *  
-	 * @return
-	 */
 	public String getCookie() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.cookie;
 	}
 
-	/**
-	 *  
-	 * @param cookie
-	 */
 	public void setCookie(String cookie) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.cookie = cookie;
 	}
 }

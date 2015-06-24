@@ -1,16 +1,17 @@
-/**
- * 
+/*
+ * Realized for the course of ISPW at University of Roma Tor Vergata.
+ * Claudio Pastorini, Omar Shalby and Federico Vagnoni.
+ * A.A. 2014/2015
  */
 package it.ispw.psv.travelagency;
 
 import org.joda.time.DateTime;
 
 /** 
- * 
+ * Bean for Person.
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class PersonBean {
-	//TODO: Read this http://stackoverflow.com/questions/27235033/using-joda-time-with-jpa-hibernate-and-spring in order to use with JPA
 	private DateTime birthdate;
 	private String mailAddress;
 	private String name;

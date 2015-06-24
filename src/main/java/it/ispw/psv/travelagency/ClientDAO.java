@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * Realized for the course of ISPW at University of Roma Tor Vergata.
+ * Claudio Pastorini, Omar Shalby and Federico Vagnoni.
+ * A.A. 2014/2015
  */
 package it.ispw.psv.travelagency;
 
@@ -9,43 +11,36 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *  
+ * This is the Data Access Object for the client.
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class ClientDAO {
-	
 	/**
-	 * Static logger instance
+	 * Static logger instance.
 	 */
 	private final static Logger LOGGER = Logger.getLogger(ClientDAO.class.getName()); 
 	
 	/** 
-	 * 
-	 * @param username
-	 * @return
+	 * This method checks if a user is already registered using his email address.
+	 * @param email: the email of the user to checks.
+	 * @return the Client founded, null otherwise.
 	 */
-	public static Boolean findByEmail(String email) {
-		// begin-user-code
+	public static Client findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
-		// end-user-code
 	}
 
-	
 	/** 
-	 * 
-	 * @param hashCode
+	 * This method allow to set confirmed a user.
+	 * @param hashCode the hashcode of the user to set confirmed.
 	 */
 	public static void setConfirmation(String hashCode) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	/** 
-	 * 
-	 * @param client
+	 * This method save a client into the database.
+	 * @param client the client to save into the database.
 	 */
 	public static void saveClient(Client client) {
 		EntityManager entityManager = JPAInitializer.getEntityManager();
@@ -58,13 +53,12 @@ public class ClientDAO {
 	}
 
 	/** 
-	 * 
-	 * @param hashCode
+	 * This method find if a user is already registered using his hashcode.
+	 * @param email: the email of the user to checks.
+	 * @return the Client founded, null otherwise.
 	 */
-	private static void findByHashCode(String hashCode) {
+	public static Client findByHashCode(String hashCode) {
 		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		return null;
 	}
 }
