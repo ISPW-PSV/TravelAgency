@@ -22,13 +22,13 @@ import org.joda.time.DateTime;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Client extends Person {
 	/**
-	 * A boolean that see if a user is confirmed or not.  
+	 * A boolean that indicates if a user has confirmed his registration or not.  
 	 */
 	@SuppressWarnings("unused")
 	private Boolean confirmed;
 	
 	/**
-	 * The hash code using the email address.  
+	 * The hash code (using the email address).  
 	 */
 	@SuppressWarnings("unused")
 	private String hashCode;
@@ -46,7 +46,7 @@ public class Client extends Person {
 	private PaymentMethod paymentMethod;
 	
 	/**
-	 * The constructor that calls first of all the super constructor with all parameters and it sets alse the hashcode, the favorite payment method and the "user" of the client.
+	 * The constructor: firstly it calls the super constructor with all parameters, and it also sets the hashcode, the favourite payment method and the "user" of the client.
 	 * @param birthdate: the birthdate of the person.
 	 * @param mailAddress: the email address.
 	 * @param name: the name.

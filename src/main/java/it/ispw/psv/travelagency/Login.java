@@ -54,7 +54,7 @@ public class Login {
 	
 	/**
 	 * This method checks if the password length is enough for the security.
-	 * @param password the password to check.
+	 * @param password: the password to check.
 	 * @return true in case of success, false otherwise.
 	 */
 	private Boolean checkPassword(String password) {

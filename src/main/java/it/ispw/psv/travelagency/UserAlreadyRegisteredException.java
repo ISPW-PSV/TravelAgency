@@ -6,7 +6,7 @@
 package it.ispw.psv.travelagency;
 
 /**
- * This Class create a UserAlreadyRegisteredException.
+ * This Class creates a UserAlreadyRegisteredException.
  */
 public class UserAlreadyRegisteredException extends Exception {
 

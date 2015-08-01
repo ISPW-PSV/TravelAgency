@@ -21,8 +21,8 @@ public class Registration {
 	private final static Logger LOGGER = Logger.getLogger(Registration.class.getName()); 
 	
 	/**
-	 * This is the main method of the Registration controller. Calling this method, the controller check if the user is not 
-	 * already registered and in case of it is a new one, send a confirmation email (before it generates a hashcode in order 
+	 * This is the main method of the Registration controller. Calling this method, the controller checks if the user is  not
+	 * already registered and, in case it is a new one, send a confirmation email (before it generates a hashcode in order 
 	 * to make safer the confirmation system) and register the user into the system.
 	 * @param mailAddress: the email address of the user.
 	 * @param name: the name of the user.

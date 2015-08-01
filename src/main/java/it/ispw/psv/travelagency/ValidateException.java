@@ -6,7 +6,7 @@
 package it.ispw.psv.travelagency;
 
 /**
- * This Class create a ValidateException.
+ * This Class creates a ValidateException.
  */
 public class ValidateException extends Exception {
 	
@@ -22,7 +22,7 @@ public class ValidateException extends Exception {
 	
 	/**
 	 * Constructor with type.
-	 * @param type the type of the exception.
+	 * @param type: the type of the exception.
 	 */
 	public ValidateException(ValidateType type) { 
 		super();
@@ -36,7 +36,7 @@ public class ValidateException extends Exception {
 	} 
 	
 	/**
-	 * This method return the type of exception.
+	 * This method returns the type of exception.
 	 * @return the type of the exception.
 	 */
 	public ValidateType getType() {

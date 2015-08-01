@@ -20,8 +20,8 @@ public class RegistrationForm {
 	private final static Logger LOGGER = Logger.getLogger(RegistrationForm.class.getName()); 
 	
 	/**
-	 * This is the main method of the RegistrationForm view. Calling this method, the view checks sintactical errors and 
-	 * after, it passes the data to the control.
+	 * This is the main method of the RegistrationForm view. Calling this method, the view checks syntactical errors and 
+	 * then passes the data to the control.
 	 * @param mailAddress: the email address of the user.
 	 * @param name: the name of the user.
 	 * @param phoneNumber: the phone number of the user.
@@ -31,7 +31,7 @@ public class RegistrationForm {
 	 * @param physicalAddress: the physical address of the user.
 	 * @param login: the login of the user.
 	 * @throws ValidateException: means that there is something wrong with the data passed, i.e. the email is not correct,
-	 * 		   the phone number is not correct or the user is too young to register himself.
+	 * 		   the phone number is not correct or the user is too young to register.
 	 * @throws UserAlreadyRegisteredException: means that the user is already registered.
 	 */
 	public static void registration(String mailAddress, String name, String phoneNumber, String surname, Gender gender, DateTime birthdate, PhysicalAddress physicalAddress, Login login, User user, PaymentMethod paymentMethod) throws ValidateException, UserAlreadyRegisteredException {

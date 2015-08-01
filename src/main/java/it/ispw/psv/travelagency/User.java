@@ -28,7 +28,7 @@ public class User {
 	private String cookie;
 
 	/**
-	 * This method return the cookie.
+	 * This method returns the cookie.
 	 * @return the cookie of the user.
 	 */
 	public String getCookie() {

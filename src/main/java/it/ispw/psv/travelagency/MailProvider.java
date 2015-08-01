@@ -32,7 +32,7 @@ public class MailProvider {
 	}
 
 	/**
-	 * This method generates confirmation link from email and hashcode.
+	 * This method generates a confirmation link from email and hashcode.
 	 * @param email: the email of the user. 
 	 * @param hashcode: the hashcode of the user.
 	 * @return the link generated.
