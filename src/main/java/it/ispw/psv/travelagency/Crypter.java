@@ -168,8 +168,33 @@ public class Crypter {
         return stringBuffer.toString();
     }
 	
+    //Modified Caesar Cipher
 	private String method3Encode(String pass){
+		//Presenti simboli tra #-A e Z-a. Potrebbero disturbare database (?)
+		// 0 = 48, 9= 57, A = 65, Z = 90, a = 97, z = 122
+		/*int j = RANDOM.nextInt(pass.length()-2)+2;  //Choose the position, at random, where will be indicated the encoding method
+		String res1 = null;
+		for(int i = 0, n = pass.length() ; i < n ; i++) { //Caesar Cipher(+i)
+		    char c = pass.charAt(i); 
+		    c+=i;
+		    res1 = res1 + c;
+		}
+		String res = null;
+		char b = pass.charAt(0); // Copy the first Character
+		res += b; 
+		res += j;// Insert where to look for the encoding method
+		for(int i = 1 ; i < j ; i++) { //Copy the next characters
+		    char c = pass.charAt(i);
+		    res = res + c;
+		}
+		res += 2; //Signal that it has been encoded by this method
+		for(int i = j, n = pass.length() ; i < n ; i++) { //Copy the remaining characters
+		    char c = pass.charAt(i);
+		    res = res + c;
+		}
 		
+		return res;
+		*/
 		return null;
 	}
 	
@@ -225,6 +250,23 @@ public class Crypter {
 	
 	private boolean method3Decode (String oldpass, String newpass){
 		//return res.equals(newpass);
+		/*String pass = null;
+		
+		pass = method3Encode(newpass);
+		String res =null;
+		res += pass.charAt(0); // Copy the first character
+		char j = pass.charAt(1); // Get the position of the character indicating the method used to encode the password
+		int k =Character.getNumericValue(j);
+		for(int i = 2 ; i < k ; i++) {  // Copy another section of the password string
+		    char c = pass.charAt(i); 
+		    res = res + c;
+		}
+		for(int i = k+1, n = pass.length() ; i < n ; i++) { //Copy the rest of the password
+		    char c = pass.charAt(i);
+		    res = res + c;
+		}
+		return pass.equals(oldpass); //Check if the two password match
+		*/
 		return false;
 	}
 	
