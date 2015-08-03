@@ -100,17 +100,20 @@ public class Crypter {
 		String res = null;
 		char b = pass.charAt(0); // Copy the first Character
 		b+=1; //Caesar Cipher(+1)
+		b = charShift(b); //Verify that it's still an alphanumeric character
 		res += b; 
 		res += j;// Insert where to look for the encoding method
 		for(int i = 1 ; i < j ; i++) { //Caesar Cipher(+1)
 		    char c = pass.charAt(i); 
 		    c+=1;
+		    c = charShift(c); //Verify that it's still an alphanumeric character
 		    res = res + c;
 		}
 		res += 0; //Signal that it has been encoded by this method
 		for(int i = j, n = pass.length() ; i < n ; i++) { //Caesar Cipher(+1)
 		    char c = pass.charAt(i); 
 		    c+=1;
+		    c = charShift(c); //Verify that it's still an alphanumeric character
 		    res = res + c;
 		}
 		
@@ -172,11 +175,13 @@ public class Crypter {
 	private String method3Encode(String pass){
 		//Presenti simboli tra #-A e Z-a. Potrebbero disturbare database (?)
 		// 0 = 48, 9= 57, A = 65, Z = 90, a = 97, z = 122
-		/*int j = RANDOM.nextInt(pass.length()-2)+2;  //Choose the position, at random, where will be indicated the encoding method
+		//Risolto (Credo)
+		int j = RANDOM.nextInt(pass.length()-2)+2;  //Choose the position, at random, where will be indicated the encoding method
 		String res1 = null;
 		for(int i = 0, n = pass.length() ; i < n ; i++) { //Caesar Cipher(+i)
 		    char c = pass.charAt(i); 
 		    c+=i;
+		    c = charShift(c); //Verify that it's still an alphanumeric character
 		    res1 = res1 + c;
 		}
 		String res = null;
@@ -194,8 +199,6 @@ public class Crypter {
 		}
 		
 		return res;
-		*/
-		return null;
 	}
 	
 	private boolean method1Decode (String oldpass, String newpass){
@@ -250,7 +253,7 @@ public class Crypter {
 	
 	private boolean method3Decode (String oldpass, String newpass){
 		//return res.equals(newpass);
-		/*String pass = null;
+		String pass = null;
 		
 		pass = method3Encode(newpass);
 		String res =null;
@@ -266,9 +269,41 @@ public class Crypter {
 		    res = res + c;
 		}
 		return pass.equals(oldpass); //Check if the two password match
-		*/
-		return false;
+		
 	}
-	
-
+	//Forse sarebbe più elegante creare una vera operazione modulo per char
+	//Shifts a non-alphanumeric char between (ASCII 48-122) inside the alphanumeric range.
+	public char charShift (char orig)
+	{
+		int val = (int) orig; //If it is a valid char, return
+		if ( (val>=48 && val<=57) || (val >=65 && val <=90) || (val>=97 && val <= 122))
+		{
+			return orig;
+		}
+		int i=0;
+		
+		if (val<48)   //Shouldn't be possible, but better safe than sorry...
+		{
+			return (char) 48;
+		}
+		if (val>57 && val<65)
+		{
+			i = val-57;
+			orig= (char) (65+i);
+			charShift (orig);
+		}
+		if (val>90 && val<97)
+		{
+			i = val-90;
+			orig= (char) (97+i);
+			charShift (orig);
+		}
+		if (val >122)
+		{
+			i = val-122;
+			orig= (char) (48+i);
+			charShift (orig);
+		}
+		return orig;
+	}
 }
