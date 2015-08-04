@@ -57,7 +57,7 @@ public class Person {
 	private Gender gender;
 
 	/**
-	 * the physical address whre the person live.
+	 * the physical address where the person live.
 	 */
 	@Embedded
 	private PhysicalAddress physicalAddress;
@@ -70,13 +70,13 @@ public class Person {
 
 	/**
 	 * The constructor.
-	 * @param birthdate: the birdate of the person.
+	 * @param birthdate: the birthdate of the person.
 	 * @param mailAddress: the email address.
 	 * @param name: the name.
 	 * @param phoneNumber: the phone number.
 	 * @param surname: the surname.
 	 * @param gender: the gender.
-	 * @param physicalAddress: the physical address whre the person live.
+	 * @param physicalAddress: the physical address where the person live.
 	 * @param login: the login.
 	 */
 	public Person(DateTime birthdate, String mailAddress, String name, String phoneNumber, String surname, Gender gender, PhysicalAddress physicalAddress, Login login) {

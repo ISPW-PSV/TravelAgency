@@ -6,7 +6,7 @@
 package it.ispw.psv.travelagency;
 
 /**
- * This Class create a UserAlreadyRegisteredException.
+ * This Class creates a UserAlreadyRegisteredException.
  */
 public class UserAlreadyRegisteredException extends Exception {
 
@@ -16,7 +16,7 @@ public class UserAlreadyRegisteredException extends Exception {
 	private static final long serialVersionUID = -5625440129135197884L;
 
 	/**
-	 * Default costructor.
+	 * Default constructor.
 	 */
 	public UserAlreadyRegisteredException() { 
 		super();

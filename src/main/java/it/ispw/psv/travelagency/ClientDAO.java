@@ -21,9 +21,9 @@ public class ClientDAO {
 	private final static Logger LOGGER = Logger.getLogger(ClientDAO.class.getName()); 
 	
 	/** 
-	 * This method checks if a user is already registered using his email address.
+	 * This method checks, using his email address, if a user is already registered.
 	 * @param email: the email of the user to checks.
-	 * @return the Client founded, null otherwise.
+	 * @return the Client found, null otherwise.
 	 */
 	public static Client findByEmail(String email) {
 		// TODO Auto-generated method stub
@@ -31,16 +31,16 @@ public class ClientDAO {
 	}
 
 	/** 
-	 * This method allow to set confirmed a user.
-	 * @param hashCode the hashcode of the user to set confirmed.
+	 * This method allows to set a user as confirmed.
+	 * @param hashCode: the hashcode of the user to set confirmed.
 	 */
 	public static void setConfirmation(String hashCode) {
 		// TODO Auto-generated method stub
 	}
 
 	/** 
-	 * This method save a client into the database.
-	 * @param client the client to save into the database.
+	 * This method saves a client into the database.
+	 * @param client: the client to save into the database.
 	 */
 	public static void saveClient(Client client) {
 		EntityManager entityManager = JPAInitializer.getEntityManager();
@@ -53,9 +53,9 @@ public class ClientDAO {
 	}
 
 	/** 
-	 * This method find if a user is already registered using his hashcode.
+	 * This method finds if a user is already registered using his hashcode.
 	 * @param email: the email of the user to checks.
-	 * @return the Client founded, null otherwise.
+	 * @return the Client found, null otherwise.
 	 */
 	public static Client findByHashCode(String hashCode) {
 		// begin-user-code

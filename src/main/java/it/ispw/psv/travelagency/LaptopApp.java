@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This is the main class for laptop app.
+ * This is the main class for the laptop app.
  */
 public class LaptopApp extends Application {
  

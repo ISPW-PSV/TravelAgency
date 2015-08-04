@@ -12,7 +12,7 @@ package it.ispw.psv.travelagency;
 public enum PaymentMethod {
 
 	/**
-	 * Enum for none of others payment method.
+	 * Enum for none of the others payment method.
 	 */
 	None, 
 	
