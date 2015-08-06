@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 /**
  * This is the Data Access Object for the client.
@@ -26,8 +28,18 @@ public class ClientDAO {
 	 * @return the Client found, null otherwise.
 	 */
 	public static Client findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager entityManager = JPAInitializer.getEntityManager();
+		TypedQuery<Client> query = entityManager.createQuery("SELECT client FROM Client client WHERE client.mailAddress = :email", Client.class);
+		
+		Client client;
+		try {
+			client = query.setParameter("email", email).getSingleResult();
+			LOGGER.info("There is no client with this email");
+		} catch (NoResultException noResultException) {
+			return null;
+		}
+		LOGGER.info(client.toString());
+	    return client;
 	}
 
 	/** 

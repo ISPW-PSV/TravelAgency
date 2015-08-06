@@ -2,8 +2,6 @@ package it.ispw.psv.travelagency;
 
 import java.util.logging.Logger;
 
-import org.joda.time.DateTime;
-
 public class LoginController {
 
 	/**

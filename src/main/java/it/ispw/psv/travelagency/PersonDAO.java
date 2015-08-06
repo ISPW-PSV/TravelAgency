@@ -7,6 +7,7 @@ public class PersonDAO {
 	/**
 	 * Static logger instance
 	 */
+	@SuppressWarnings("unused")
 	private final static Logger LOGGER = Logger.getLogger(PersonDAO.class.getName()); 
 	
 	/** 

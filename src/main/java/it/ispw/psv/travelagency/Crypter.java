@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 //NOTE: Should a class on crypting be commented?
 
 public class Crypter {

@@ -38,7 +38,6 @@ public class Login {
 	 */
 	public Login(String username, String password) {
 		if (checkPassword(password)) {
-			
 			this.username = username;
 			this.password = (new Crypter()).encode(password);
 		} else {
@@ -56,7 +55,5 @@ public class Login {
 	 */
 	private Boolean checkPassword(String password) {
 		return password.length() >= 8;
-	}
-	
-	
+	}	
 }

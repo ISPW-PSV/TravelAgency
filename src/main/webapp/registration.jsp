@@ -42,6 +42,8 @@
 		// Call view
 		try {
 			RegistrationForm.registration(clientBean.getMailAddress(), clientBean.getName(), clientBean.getPhoneNumber(), clientBean.getSurname(), clientBean.getGender(), clientBean.getBirthdate(), clientBean.getPhysicalAddress(), clientBean.getLogin(), clientBean.getUser(), clientBean.getPaymentMethod());
+			// Redirect to home
+			response.sendRedirect("index.jsp");
 		} catch (ValidateException exception) {
 			if(exception.getType() == ValidateType.EmailAddress) {
 				//TODO show error	
@@ -55,8 +57,6 @@
 		} catch (UserAlreadyRegisteredException exception) {
 			//TODO show error and login form (?)
 		}
-		// Redirect to home
-		response.sendRedirect("index.jsp");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,7 +72,7 @@
 	
   	</head>
 
-  	<body>
+  	<body class="overlayable">
         <%@include file="navbar.html" %>
         
 	      <div class="container first">
@@ -109,6 +109,7 @@
 									</label>
 								</div>   
 					      </c:forEach>
+					      <span class="help-block">Insert your gender</span>
 					  </div>
 					</div>
 					
@@ -183,7 +184,7 @@
 					      <span class="input-group-addon">+39</span>
 					      <input id="phoneNumber" name="phoneNumber" class="form-control required" placeholder="123456789" type="text">
 					    </div>
-					    <p class="help-block">Insert your phone number</p>
+					    <span class="help-block">Insert your phone number</span>
 					  </div>
 					</div>
 					
@@ -219,7 +220,7 @@
 					  <label class="col-md-4 control-label" for="favouritePayamentMethod">Favourite Payament Method</label>
 					  <div class="col-md-4">
 					    <select id="favouritePayamentMethod" name="favouritePayamentMethod" class="form-control required">
-							<c:forEach items="<%= it.ispw.psv.travelagency.PaymentMethod.values() %>" var="method"> TODO: improve, not the right way
+							<c:forEach items="<%=it.ispw.psv.travelagency.PaymentMethod.values() %>" var="method"> TODO: improve, not the right way
 					        	<option value="${method}">${method}</option>        
 					        </c:forEach>
 					    </select>
@@ -246,6 +247,8 @@
 	    <%@include file="base_scripts.html" %>		
 	    <!-- Datapicker -->
 	    <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js" />"></script>
+	    <!-- Loading Overlay -->
+	    <script src="<c:url value="/resources/js/jquery.easy-overlay.js" />"></script>
 	    <script>
 		    // Set Datapicker
 		    $(document).ready(function() {
@@ -255,24 +258,44 @@
 		    	});
 		    });
 		    
+		 	// Set overlay
+		    $(document).ready(function() {
+		    	$("#registrationForm").on("submit", function(event) {
+		    		// Remove overlay
+		    		$(".overlayable").overlay();
+		    		// Remove all alerts
+		    		$(".alert").remove();
+		    	});
+		    });
+		    
 		    function getErrorMessage(error) {
 		    	return "<div class=\"alert alert-danger\" role=\"alert\"> \  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> \   <span class=\"sr-only\">Error:</span> \ Enter a valid \"" + error + "\"  \ </div>";
 		    }
 		    
-		    // Chech null input required
+		    // Check null input required
 		    $(document).ready(function() {
 		    	$("#registrationForm").on("submit", function(event) {
 			        var fields = $("input.required");
 			        for(var i = 0; i < fields.length; i++) {
 			            if($(fields[i]).val() == '') {
 				    		event.preventDefault();
-							
+		       				// Get input name
 				    		var name = $(fields[i]).closest(":has(label)").find("label").text();
-				    		
-			            	$(fields[i]).closest(":has(span)").find("span").after(getErrorMessage(name));
-			            } else {
-			            	// TODO: remove
+			            	$(fields[i]).parent(":has(span)").find("span.help-block").after(getErrorMessage(name));
+			            	if (fields[i].id == "phoneNumber") {
+				            	$(fields[i]).parent().parent(":has(span)").find("span.help-block").after(getErrorMessage(name));
+		    				}
+							// Remove overlay
+			            	$(".overlayable").overlayout();
 			            }
+			        }
+			        // Check also radio buttons
+			        if(!$('input:radio[name=gender].required').is(":checked")) {
+			        	var name = "Gender";
+	       				// Get input name
+	       				$('input:radio[name=gender].required').closest(":has(span)").find("span").after(getErrorMessage(name));
+						// Remove overlay
+	       				$(".overlayable").overlayout();
 			        }
 		    	});
 		    });	    
@@ -285,10 +308,12 @@
 	        		var regex = new RegExp("<%=Validator.getEmailPattern() %>");
 	       			if (!regex.test(mailAddressInput.val())) {
 	       				var name = mailAddressInput.closest(":has(label)").find("label").text();
-			    		
+	       				// Get input name
 	       				mailAddressInput.closest(":has(span)").find("span").after(getErrorMessage(name));
+						// Remove overlay
+	       				$(".overlayable").overlayout();
 	       			} else {
-	       				//TODO: remove
+	       				mailAddressInput.parent().find(".alert").remove();	
 	       			}
 	        	});
 	        });
@@ -301,11 +326,13 @@
 	        		var fixRegex = new RegExp("<%=Validator.getFixPhonePattern() %>"); 
 	        		var mobileRegex = new RegExp("<%=Validator.getMobilePhonePattern() %>");
 	       			if (!(fixRegex.test(phoneNumberInput.val()) || mobileRegex.test(phoneNumberInput.val()))) {
+	       				// Get input name
 	       				var name = phoneNumberInput.closest(":has(label)").find("label").text();
-			    		
-	       				phoneNumberInput.closest(":has(span)").find("span").after(getErrorMessage(name));
+	       				phoneNumberInput.parent().parent(":has(span)").find("span.help-block").after(getErrorMessage(name));
+						// Remove overlay
+	       				$(".overlayable").overlayout();
 	       			} else {
-	       				//TODO: remove
+	       				phoneNumberInput.parent().parent().find(".alert").remove();	
 	       			}
 	        	});
 	        });

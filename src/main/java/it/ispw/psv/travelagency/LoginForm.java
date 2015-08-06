@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.joda.time.DateTime;
-
 public class LoginForm {
 
 	/**
